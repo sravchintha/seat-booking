@@ -1,7 +1,10 @@
 const fs=require('fs')
 const readline=require('readline')
+//const faker=require('Faker')
 bookingData=[]
 userData=[]
+var ID=[];
+var SEAT=[];
 //Creating An Interface Of Readline
 const rl=readline.createInterface({
     input:process.stdin,
@@ -35,9 +38,8 @@ fs.readFile(`user.txt`,'utf8',(err,data)=>{
         })
         m=userData.length-1
     }
+    menu()
 })
-menu()   //MENU Funtion Calling To Execute For User Requirements
-//MENU Function Declaration
 function menu() {
     console.log('\nWELCOME TO MY KIOSK :');
     console.log('1. VIEW ALL THE SEATS AVAILABLE TO BOOK');
