@@ -38,6 +38,7 @@ fs.readFile(`user.txt`,'utf8',(err,data)=>{
 })
 menu()   //MENU Funtion Calling To Execute For User Requirements
 //MENU Function Declaration
+
 function menu() {
     console.log('\nWELCOME TO MY KIOSK :');
     console.log('1. VIEW ALL THE SEATS AVAILABLE TO BOOK');
