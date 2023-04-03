@@ -1,53 +1,48 @@
-//Update An Emails For Required Seat Number
+//3 UPDATE AN EMAILS
 function update_emails() {
     console.log("UPDATE AN EMAIL ADDRESS");
-    bookingData.forEach((booking,index)=>{
-        if(index<n){
-            console.log("-->", bookingData[index].seat);
+    //Defining BOOKING DATA Into An Array
+    bookingData.forEach((data,index)=>{
+        i=index;
+        if(i<n){
+            ID[i]=bookingData[i].bookingid;
+            SEAT[i]=bookingData[i].seat;
         }
-    });
-  
+        console.log(SEAT[i]);
+    })
     rl.question("Choose Any One Of The Above Seat Number To Update Email : ",(answer)=>{
         console.log(answer);
-        let foundBooking = false;
-        for (let i = 0; i < n; i++) {
-            if (answer === bookingData[i].seat) {
-                foundBooking = true;
-                if (bookingData[i].bookingid !== "_") {
-                    console.log("Email Is Already Exist");
-                    rl.question("If You Want To Update Press 'Y': ", (ans) => {
-                        if (ans === "Y") {
-                        updateEmail(i);
-                        } else {
-                            menu();
-                        }
-                    });
-                } 
-                else {
-                    console.log("User Has No Email Address");
-                    try{
-                        rl.question("Enter An Email Address: ", (em) => {
-                            //userData[i].email = em;
-                            console.log("Unable To Update")
-                            menu()
-                        });
-                    }
-                    catch{
-                        console.log("Unable To Update")
-                        menu()
+        let foundBooking=false;
+        for(let i=0;i<n;i++){
+            if(answer===SEAT[i]){
+                foundBooking=true;
+                for(let j=0;j<=m;j++){
+                    if(bookingData[i].bookingid==userData[j].bookingid){
+                        update_exist_email(j);
                     }
                 }
             }
         }
         if(!foundBooking){
             console.log("Invalid Seat Number");
-            menu();
+            menu()
         }
     });
 }
-function updateEmail(index){
-    rl.question("Enter New Email :",(e)=>{
-        userData[index].email=e;
-        menu();
+//Update An Existing Email In User Data
+function update_exist_email(j){
+    console.log("Email Is Already Exist");
+    rl.question("If You Want To Update Press 'Y': ", (ans) => {
+        if(ans==="Y"){
+            rl.question("Enter New Email :",(e)=>{
+                userData[j].email=e
+                fs.appendFileSync('user_update.txt',userData[j].bookingid+':'+e+';\n',(err)=>{
+                    if(err){
+                        console.log("Error At append_user1()")
+                    }
+                })
+            });
+        }
     });
+    menu()
 }

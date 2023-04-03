@@ -1,3 +1,4 @@
+//1 AVAILABLE SEATS
 function available_seats(){
     console.log("\nAVAILABLE SEATS TO BOOK :" )
     for(let i=0;i<n;i++){
